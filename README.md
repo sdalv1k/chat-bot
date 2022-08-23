@@ -1,8 +1,21 @@
 # Steps to Start the App
 
-## Install the Public Dependencies
-## Install the Server Dependencies
-## In the Server Directory there's a .env file. Change the value of mongodb inside the file. Set the value as your mongodb connection url.
-## Now start the server by yarn start
-## Now start the react by yarn start
-## And the chat application would be running successfully by now.
+# Prerequisites
+- nodejs - https://nodejs.org/en/
+
+# Installation
+- `yarn add react-toastify`
+- `yarn add buffer`
+- `yarn add react-icons`
+- `yarn add emoji-picker-react`
+- `yarn add uuid`
+
+- nodemon: `npm install -g nodemon`
+- yarn: `npm install --global yarn`
+- express: `npm install express`
+- react-scripts: `npm install react-scripts --save` in /chat-app/public (ignore severity warnings)
+
+# START
+`yarn start` in /chat-app/public
+
+The chat bot application should now successfully open in a browser.
