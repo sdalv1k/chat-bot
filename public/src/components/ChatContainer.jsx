@@ -1,37 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
-import Logout from "./Logout";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
-import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
+import Yoda from "../assets/yoda-avatar.png";
 
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-
-  useEffect(async () => {
-    const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    );
-    const response = await axios.post(recieveMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-    });
-    setMessages(response.data);
-  }, [currentChat]);
-
-  useEffect(() => {
-    const getCurrentChat = async () => {
-      if (currentChat) {
-        await JSON.parse(
-          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-        )._id;
-      }
-    };
-    getCurrentChat();
-  }, [currentChat]);
 
   const handleSendMsg = async (msg) => {
     const data = await JSON.parse(
@@ -42,12 +18,7 @@ export default function ChatContainer({ currentChat, socket }) {
       from: data._id,
       msg,
     });
-    await axios.post(sendMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-      message: msg,
-    });
-
+    
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);
@@ -75,7 +46,7 @@ export default function ChatContainer({ currentChat, socket }) {
         <div className="user-details">
           <div className="avatar">
             <img
-              src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
+              src={Yoda}
               alt=""
             />
           </div>
@@ -83,7 +54,6 @@ export default function ChatContainer({ currentChat, socket }) {
             <h3>{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
       </div>
       <div className="chat-messages">
         {messages.map((message) => {
