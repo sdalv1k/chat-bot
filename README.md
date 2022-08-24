@@ -14,7 +14,6 @@
 - express: `npm install express`
 - react-scripts: `npm install react-scripts --save` in /chat-app/public
 
-<<<<<<< HEAD
 ## Pandorabot API module for Node.js
 - pb-node: `npm install pb-node`
 
