@@ -8,6 +8,7 @@ var cors = require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var messageRouter = require("./routes/messages");
+var ttsRouter = require("./routes/tts");
 
 var app = express();
 var bodyParser = require('body-parser')
@@ -27,16 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/messages", messageRouter)
-
-app.post("/message", async (req, res) => {
-  bot.talk(req, function (err, message) {
-      if (!err){
-      console.log(message.responses);
-      res.json(message);
-      }
-  });
-});
+app.use("/messages", messageRouter);
+app.use("/tts", ttsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

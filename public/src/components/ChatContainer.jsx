@@ -4,7 +4,7 @@ import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 import Yoda from "../assets/yoda-avatar.png";
 import axios from "axios";
-import { messageRouter } from "../utils/APIRoutes";
+import { messageRouter, ttsRouter } from "../utils/APIRoutes";
 
 export default function ChatContainer({ currentChat, socket }) {
   const [post, setPost] = React.useState(null);
@@ -23,8 +23,32 @@ export default function ChatContainer({ currentChat, socket }) {
     }).then(response => {
       console.log(response.data.responses);
       setArrivalMessage({ fromself: false, message: response.data.responses });
+
+      loadAudioURL(response.data.responses);
     });
   };
+
+  const loadAudioURL = async (msg) => {
+    await axios.post(ttsRouter, {
+      input: msg
+    }).then(response => {
+      console.log("ttsRouter response: " + response.data.result);
+      playAudio(response.data.result);
+    })
+  };
+
+  async function playAudio(url) {
+    console.log("Playing: " + url);
+    var audio = new Audio(url);  
+    audio.type = 'audio/wav';
+  
+    try {
+      await audio.play();
+      console.log('Playing...');
+    } catch (err) {
+      console.log('Failed to play...' + err);
+    }
+  }
 
   useEffect(() => {
     if (socket.current) {

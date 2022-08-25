@@ -2,7 +2,6 @@
 const express = require("express");
 const router = express.Router();
 
-
 const Pandorabot = require("pb-node");
 
 var options = {
@@ -14,7 +13,6 @@ var options = {
 
 var bot = new Pandorabot(options);
 
-
 // var talkParams = {
 //     input: "hello"
 // }
@@ -25,7 +23,7 @@ var bot = new Pandorabot(options);
 // });
 
 router.get('/', (req, res)=>{
-    res.send("Backend is working");
+    res.send("Message backend is working");
 });
 
 router.post("/", async (req, res) => {
