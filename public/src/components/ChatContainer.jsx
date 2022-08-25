@@ -8,16 +8,6 @@ import { messageRouter } from "../utils/APIRoutes";
 
 export default function ChatContainer({ currentChat, socket }) {
   const [post, setPost] = React.useState(null);
-
-  // React.useEffect(async () => {
-  //   await axios.get(messageRouter).then((response) => {
-  //     setPost(response.data);
-  //   });
-  // }, []);
-
-  // console.log(post);
-
-
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -29,7 +19,10 @@ export default function ChatContainer({ currentChat, socket }) {
     setMessages(msgs);
 
     await axios.post(messageRouter, {
-      input: "hello"
+      input: msg
+    }).then(response => {
+      console.log(response.data.responses);
+      setArrivalMessage({ fromself: false, message: response.data.responses });
     });
   };
 
