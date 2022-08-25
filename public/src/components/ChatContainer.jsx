@@ -3,25 +3,34 @@ import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import { v4 as uuidv4 } from "uuid";
 import Yoda from "../assets/yoda-avatar.png";
+import axios from "axios";
+import { messageRouter } from "../utils/APIRoutes";
 
 export default function ChatContainer({ currentChat, socket }) {
+  const [post, setPost] = React.useState(null);
+
+  // React.useEffect(async () => {
+  //   await axios.get(messageRouter).then((response) => {
+  //     setPost(response.data);
+  //   });
+  // }, []);
+
+  // console.log(post);
+
+
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
 
   const handleSendMsg = async (msg) => {
-    // const data = await JSON.parse(
-    //   localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    // );
-    // socket.current.emit("send-msg", {
-    //   to: currentChat._id,
-    //   from: data._id,
-    //   msg,
-    // });
     
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);
+
+    await axios.post(messageRouter, {
+      input: "hello"
+    });
   };
 
   useEffect(() => {

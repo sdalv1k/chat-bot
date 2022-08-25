@@ -1,0 +1,35 @@
+{
+  "name": "pb-node",
+  "version": "2.0.1",
+  "description": "Pandorabots API Module",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "Pandorabots",
+    "NLP",
+    "AI"
+  ],
+  "homepage": "http://github.com/pandorabots/pb-node/",
+  "bugs": {
+    "url": "http://github.com/pandorabots/pb-node/issues"
+  },
+  "license": "BSD",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/pandorabots/pb-node.git"
+  },
+  "dependencies": {
+    "extend": "^3.0.0",
+    "request": "^2.37.0"
+  },
+  "author": [
+    "Daniel Fried <daniel.fried@pandorabots.com>"
+  ],
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "nock": "^2.13.0"
+  }
+}
