@@ -12,11 +12,7 @@
 - `yarn add uuid`
 - nodemon: `npm install -g nodemon`
 - express: `npm install express`
-- react-scripts: `npm install react-scripts --save` in /chat-app/api
 - react-scripts: `npm install react-scripts --save` in /chat-app/public
-
-## Pandorabot API module for Node.js
-- pb-node: `npm install pb-node`
 
 # Start
 `yarn start` in /chat-app/api
