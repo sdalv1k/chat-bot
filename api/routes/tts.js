@@ -21,13 +21,19 @@ router.get('/', (req, res)=>{
 
 router.post("/", async (req, res) => {
     console.log("tts message: \"" + req.body.input + "\"");
-    let result = await fy.makeTTS('yoda', req.body.input.toString());
-    console.log("audio URL: " + result.audioURL());
+    let result = '';
+    try {
+        result = await fy.makeTTS('yoda', req.body.input.toString());
+        console.log("audio URL: " + result.audioURL());
+    } catch (err) {
+        console.log(err);
+    }
+
     try {
         res.json({ result: result.audioURL() });
     } catch (err) {
         console.log("Error sending audioURL!");
-        res.status(500).send(error);
+        res.status(500).send(err);
     }
 });
 
